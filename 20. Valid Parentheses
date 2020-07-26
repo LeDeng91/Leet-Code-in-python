@@ -1,0 +1,61 @@
+Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+
+"""
+class Solution(object):
+    
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        
+        stack = []
+        map = {"{":"}",
+               "(":")",
+               "[":"]"
+            
+        }
+        
+        for x in s:
+            if x in map:
+                stack.append(map[x])
+            else:
+                if len(stack)!=0:
+                    top_element = stack.pop()
+                    if x!=top_element:
+                        return False
+                    else:
+                        continue
+                else:
+                    return False
+                
+        return len(stack) == 0
+        
+        """
+        
+        """
+        explanation:
+        let's take instance 1 ['(','[','}'] and instance 2 ['{','[',']','}'] as examples:
+        instance 1:
+        1: the 1st element '(' is in the map, so the ')' will be added in the stack. ------------> status check: stack=(')')
+        2: the 2nd element '[' is in the map, so the ']' will be added in the stack. ------------> status check: stack=(')',']')
+        3: the 3rd element '}' is not in the map, so move to the else-statement: 
+           top_element = ']', and '}' not equals ']', so the output is FALSE
+           
+        instance 2:
+        1: the 1st element '{' is in the map, so the '}' will be added in the stack. ------------> status check: stack=('}')
+        2: the 2nd element '[' is in the map, so the ']' will be added in the stack. ------------> status check: stack=('}',']')
+        3. the 3rd element ']' is not in the map, so move to else-statement:
+           top_element in stack is ] and matches the 3rd element: continue. ----------------------> status check: stack=('}') (the "]" is out because of pop command)
+        4. the 4th element '}' is not in the map, so move to slese-statement:
+           top_element in stack is } and matches the 4th element: continue. ----------------------> status check: stack=() (the "}" is out because of pop command)
+           The length will be used as a FLAG to determine the output. If it becomes 0, that means the stack is now emptyed successfully and all the brackets are closed in the right order.
+           the final output is True
+                                                                                
+                                                                                
+                                                                                
