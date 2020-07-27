@@ -1,0 +1,55 @@
+Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
+
+Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+
+Example 1:
+
+Given nums = [1,1,2],
+
+Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively.
+
+It doesn't matter what you leave beyond the returned length.
+Example 2:
+
+Given nums = [0,0,1,1,1,2,2,3,3,4],
+
+Your function should return length = 5, with the first five elements of nums being modified to 0, 1, 2, 3, and 4 respectively.
+
+It doesn't matter what values are set beyond the returned length.
+
+class Solution(object):
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if nums:
+            slow = 0
+            for fast in range(1,len(nums)):
+                if nums[fast]!= nums[slow]:
+                    slow += 1
+                    nums[slow] = nums[fast]
+                    
+            return slow + 1
+        
+        else:
+            return 0
+            
+            
+"""            
+#explanation:
+The trick here to is use two separate indexs: slow index(SI) and fast index(FI)
+every time u move the FI forward with one step and look at the SI
+If SI and FI are the same, it means there is a repulicate. So we will just keep moving the FI and let the SI stay.
+If SI and FI are not the same, it means there's no repulicate. So while continue moving the FI we will set SI plus 1(step a) and set the nums[SI] same as the nums[FI](step b)
+------------------------------------------------------------------following information very important!--------------------------------------------------------------------------------
+with step a, we can count the number of non-repulicates!
+with step b, we let the SI jump ahead direkt to the position of FI and start to count the NEW non-repulicates. What does that mean? Imagine that u have like 5 repulicates for 
+a certain element, and after 5 iterations the FI is about to move to a new element, but the SI is still staying at the beginning position of this 5 repulicates-row. So with 
+step b, we just let SI jump to the position of FI and start the determine-and-count process simultaneously. 
+How elegant with these two steps!
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+The Initial approach of mine is to use the FI and SI to count the numbers too, however, what i supposed to do was to delete an element after i found it's a repulicate, and then
+move on. But the problem is, every time I delete the element, the total length of the array will be changed! The FI will just be out of range at the end! To use this approach I wil
+ need to have a copie of the array, and that doesn't meet the requirement of this assignment.
+ """
