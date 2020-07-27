@@ -38,8 +38,8 @@ class Solution(object):
   """
   explanation:
   let's take another instance to walk through the code:
-  nums1=[5,9,20,X,X,X,X](X doesn't count for the length)    m=3
-  nums2=[1,2,3,7]                                           n=4
+  nums1=[5,9,20,X,X,X,X](X doesn't count for the length m, as they are treated as placeholder)    m=3
+  nums2=[1,2,3,7]                                                                                 n=4
   
   step 1:
   nums1[2] > nums2[3]    (20>7)    =============>   nums1[6]=20        status check=================> nums1=[5,9,20,X,X,X,20], m=2, n=4
@@ -50,7 +50,7 @@ class Solution(object):
   step 4:
   nums1[0] > nums2[2]    (5>3)     =============>   nums1[3]=5        status check=================> nums1=[5,9,20,5,7,9,20], m=0, n=3
   step 5:
-  m is already 0, then: nums1[:3] = nums2[:3]      status check=================> nums1=[1,2,3,5,7,9,20], m=0, n=3
+  m is already 0, then just use the slicing function: nums1[:3] = nums2[:3]      status check=================> nums1=[1,2,3,5,7,9,20], m=0, n=3
   
   Done!
   So to recap intuitively:
@@ -58,10 +58,10 @@ class Solution(object):
   you compare everytime the last apple of the two backets, and put the bigger one in the current last slot in the backet.
   The logic is just that easy.
   However, in the programming, the trick here is the manipulate the indices neat.
-  Every time after u put a apple in the current last slot, the total count(m+n) will be reduced by 1. It either comes from the backet 1, or 2
+  Every time after u put a apple in the current last slot, the total slot(m+n) will be reduced by 1. It either comes from the backet 1, or 2
   So, if the last apple u put in the last plot comes from backet 1, then u let m-1
   If the apple comes from backet 2, then u let n-1
-  This step allows me everytime to compare the 2 biggest apples which left in my 2 backets.
+  This step allows u everytime to compare the 2 biggest apples which left in my 2 backets.
   If u realize at the end, that there're still apples in backet 2 while the apples in backet 1 are already sorted,
   it means that the biggest apple now in the backet 1 is smaller than all of the apples originally in backet 1(because u keep compare it with the apples in backet 1 and they are 
   all bigger than this one in backet 2, so it gets stucked)
