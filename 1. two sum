@@ -48,7 +48,7 @@ for the second round in loop(element "7" in nums):
 diff=9-7=2
 2 is in mapping!! So it means that the diff also exists as an element in the nums
 so print out the index of this diff in nums(which is 0) and the index of the current element in nums(which is 1)
-you can also switch the order of output but then the indices of the two numbers will be descending.
+you can also switch the order of output but then the order of indices will be descending.
 
 """
 
