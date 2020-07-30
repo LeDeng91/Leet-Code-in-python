@@ -23,3 +23,24 @@ Input: [7,6,4,3,1]
 Output: 0
 Explanation: In this case, no transaction is done, i.e. max profit = 0.
 
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        total_profit = 0
+        for i in range(1,len(prices)):
+            if prices[i] > prices[i-1]:
+                profit = prices[i] - prices[i-1]
+                total_profit = total_profit+profit
+                
+        return total_profit 
+        
+        
+#explanation:
+#still easy. Remember: even the stock price is a sequential model in ascending order(like 1 2 3 4 5), buy the stock on day 1 and sell 
+on day 2, buy on day 3 and sell on day 4 makes no difference wenn compared to buy on day 1 and sell on day 4, so you can use this 
+algorithm with no doubt.However, the transaction in real life do cost your money so you should avoid unnecessarily transaction. 
+So if we modify the model and do charge transaction fee, the algorithm gonna change.
+
